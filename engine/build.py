@@ -109,6 +109,9 @@ def layout(site, *, title, description, content, rel, canonical=None, noindex=Fa
         og_tags = (f'<meta property="og:title" content="{esc(title)}">'
                    f'<meta property="og:image" content="{esc(og_abs)}">'
                    f'<meta name="twitter:card" content="summary_large_image">')
+    verification = ""
+    if site.get("googleSiteVerification"):
+        verification = f'<meta name="google-site-verification" content="{esc(site["googleSiteVerification"])}">'
     header_cls = "site-header"
     header_style = ""
     if site.get("_headerImage"):
@@ -125,6 +128,7 @@ def layout(site, *, title, description, content, rel, canonical=None, noindex=Fa
 {canonical_tag}
 {robots}
 {og_tags}
+{verification}
 <link rel="stylesheet" href="{rel}style.css">
 <style>:root {{ --primary: {t["primary"]}; --accent: {t["accent"]}; --bg: {t["bg"]}; }}</style>
 </head>
