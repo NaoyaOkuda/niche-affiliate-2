@@ -3,6 +3,7 @@ title: "ハリネズミのケージの選び方|広さ・掃除・脱走対策"
 description: "ハリネズミ初心者向けに、ケージ選びで押さえたい広さの目安・掃除のしやすさ・脱走対策のポイントをわかりやすく解説します。"
 date: 2026-08-03
 category: "ハリネズミ"
+image: "eyecatch-hedgehog-cage-selection-guide.jpg"
 products:
   - name: "ハリネズミ用衣装ケースケージ"
     keyword: "ハリネズミ ケージ 衣装ケース"
