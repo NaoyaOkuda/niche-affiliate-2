@@ -55,7 +55,8 @@ gh repo create niche-affiliate --public --source=. --push
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Claude APIキー(週次記事生成に必須) | https://console.anthropic.com/ |
 | `GEMINI_API_KEY` | Gemini APIキー(記事アイキャッチの自動生成。任意) | https://aistudio.google.com/ |
-| `RAKUTEN_APP_ID` | 楽天ウェブサービスのアプリID | https://webservice.rakuten.co.jp/ |
+| `RAKUTEN_APP_ID` | 楽天のアプリケーションID(UUID形式) | https://webservice.rakuten.co.jp/ |
+| `RAKUTEN_ACCESS_KEY` | 楽天のアクセスキー(秘密情報。2026年新API仕様で必須) | 同上の管理画面 |
 | `RAKUTEN_AFFILIATE_ID` | 楽天アフィリエイトID | https://affiliate.rakuten.co.jp/ |
 | `AMAZON_TAG` | Amazonアソシエイトのトラッキングタグ | https://affiliate.amazon.co.jp/ |
 

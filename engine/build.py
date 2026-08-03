@@ -347,7 +347,20 @@ def build_site(site_dir: Path, cache: dict):
     return site
 
 
+def load_local_env():
+    """ローカル用の認証情報ファイル(git管理外)を環境変数に読み込む"""
+    env_file = ROOT / "data" / "rakuten.env"
+    if not env_file.exists():
+        return
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
+
+
 def main():
+    load_local_env()
     target = sys.argv[1] if len(sys.argv) > 1 else None
     cache_file = ROOT / "data" / "product_cache.json"
     cache = json.loads(cache_file.read_text(encoding="utf-8")) if cache_file.exists() else {}

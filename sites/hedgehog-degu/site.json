@@ -13,8 +13,9 @@
     "bg": "#faf6ef"
   },
   "affiliate": {
-    "rakutenAppId": "",
-    "rakutenAffiliateId": "",
+    "rakutenAppId": "eaef651d-2526-4296-b9ef-f1d2810bf235",
+    "rakutenAffiliateId": "56479010.6fe19aef.56479011.d0c02977",
+    "rakutenAccessKey": "",
     "amazonTag": ""
   },
   "articlesPerRun": 1,
