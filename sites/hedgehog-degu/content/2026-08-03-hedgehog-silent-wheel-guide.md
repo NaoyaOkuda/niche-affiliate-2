@@ -3,6 +3,7 @@ title: "ハリネズミの回し車はサイレント一択?選び方と比較"
 description: "ハリネズミの回し車はなぜサイレントタイプが人気なのか、選び方のポイントと静音性の比較、注意点をわかりやすく解説します。"
 date: 2026-08-03
 category: "ハリネズミ"
+image: "eyecatch-hedgehog-silent-wheel-guide.jpg"
 products:
   - name: "サイレントホイール(静音回し車)"
     keyword: "ハリネズミ 回し車 サイレント"
