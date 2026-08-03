@@ -112,6 +112,12 @@ def layout(site, *, title, description, content, rel, canonical=None, noindex=Fa
     verification = ""
     if site.get("googleSiteVerification"):
         verification = f'<meta name="google-site-verification" content="{esc(site["googleSiteVerification"])}">'
+    analytics = ""
+    if site.get("ga4Id"):
+        gid = esc(site["ga4Id"])
+        analytics = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>'
+                     f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}'
+                     f'gtag("js",new Date());gtag("config","{gid}");</script>')
     header_cls = "site-header"
     header_style = ""
     if site.get("_headerImage"):
@@ -129,6 +135,7 @@ def layout(site, *, title, description, content, rel, canonical=None, noindex=Fa
 {robots}
 {og_tags}
 {verification}
+{analytics}
 <link rel="stylesheet" href="{rel}style.css">
 <style>:root {{ --primary: {t["primary"]}; --accent: {t["accent"]}; --bg: {t["bg"]}; }}</style>
 </head>
