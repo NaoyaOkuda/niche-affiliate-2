@@ -1,0 +1,65 @@
+# 毎週月曜 6:00 JST に新記事を自動生成し、GitHub Pagesへデプロイする
+# push時は生成をスキップしてビルド+デプロイのみ行う
+name: publish
+
+on:
+  schedule:
+    - cron: "0 21 * * 0" # 日曜21:00 UTC = 月曜6:00 JST
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install markdown pyyaml
+
+      - name: 新記事を生成
+        if: github.event_name != 'push'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python engine/generate.py
+
+      - name: 生成した記事をコミット
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sites
+          git diff --cached --quiet || (git commit -m "chore: 週次記事の自動生成 $(date +%F)" && git push)
+
+      - name: サイトをビルド
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+          AMAZON_TAG: ${{ secrets.AMAZON_TAG }}
+        run: python engine/build.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

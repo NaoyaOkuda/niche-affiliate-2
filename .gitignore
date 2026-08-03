@@ -1,0 +1,4 @@
+dist/
+data/product_cache.json
+__pycache__/
+.DS_Store
